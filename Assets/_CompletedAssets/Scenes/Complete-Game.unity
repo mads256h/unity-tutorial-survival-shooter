@@ -1877,6 +1877,7 @@ MonoBehaviour:
   itemAsset: {fileID: 2823567731083536338, guid: 7ea95847dc6132111b694cbc0523b8ea,
     type: 3}
   playerShooting: {fileID: 2072406361}
+  gunLineUber: {fileID: 2100000, guid: 753486700273ab1dc97c289d26fc23c7, type: 2}
 --- !u!1 &636207312
 GameObject:
   m_ObjectHideFlags: 0
@@ -3584,7 +3585,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 10800002, guid: 4e5a0d387dc27394b81600988ad0216f, type: 3}
       propertyPath: m_BounceIntensity
-      value: .5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 4e5a0d387dc27394b81600988ad0216f, type: 3}
       propertyPath: healthSlider
