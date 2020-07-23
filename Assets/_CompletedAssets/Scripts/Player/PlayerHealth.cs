@@ -23,7 +23,21 @@ namespace CompleteProject
         bool isDead;                                                // Whether the player is dead.
         bool damaged;                                               // True when the player gets damaged.
 
+        private int _regenRate = 0;
 
+        private float _timer = 0.0f;
+
+        public void UpgradeRegen(int level)
+        {
+            _regenRate = level;
+        }
+
+        public void UpgradeHealth(int level)
+        {
+            startingHealth = 100 * (level + 1);
+            healthSlider.maxValue = startingHealth;
+        }
+        
         void Awake ()
         {
             // Setting up the references.
@@ -54,6 +68,18 @@ namespace CompleteProject
 
             // Reset the damaged flag.
             damaged = false;
+
+            if (!isDead && _regenRate != 0)
+            {
+                _timer += Time.deltaTime;
+            }
+
+            if (currentHealth < startingHealth && _timer >= (1.0f / (float) _regenRate))
+            {
+                _timer = 0.0f;
+                currentHealth++;
+                healthSlider.value = currentHealth;
+            }
         }
 
 

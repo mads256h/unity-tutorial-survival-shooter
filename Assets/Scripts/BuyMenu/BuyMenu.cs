@@ -14,6 +14,8 @@ namespace BuyMenu
 
         [SerializeField] private PlayerShooting playerShooting;
 
+        [SerializeField] private PlayerHealth playerHealth;
+
         private int _currentY = -10;
         
         // Start is called before the first frame update
@@ -21,6 +23,10 @@ namespace BuyMenu
         {
             AddPanel(new BuyMenuItemProperties("Gun firerate",1, 2.0, playerShooting.UpgradeFirerate));
             AddPanel(new BuyMenuItemProperties("Gun damage",1, 1.0, playerShooting.UpgradeDamage));
+            
+            // Health
+            AddPanel(new BuyMenuItemProperties("Health Regen", 1, 1.0, playerHealth.UpgradeRegen));
+            AddPanel(new BuyMenuItemProperties("Health", 1, 1.0, playerHealth.UpgradeHealth));
         }
 
         private void AddPanel(BuyMenuItemProperties properties)
@@ -33,7 +39,10 @@ namespace BuyMenu
 
             rectTransform.anchoredPosition = new Vector2(rectTransform.anchoredPosition.x, _currentY);
 
-            _currentY = -((int)rectTransform.rect.height) + -10;
+            
+            
+            _currentY -= (int) rectTransform.rect.height;
+            _currentY -= 10;
         }
     }   
 }
