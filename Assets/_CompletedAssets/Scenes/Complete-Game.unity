@@ -374,6 +374,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 93410271}
   m_CullTransparentMesh: 0
+--- !u!54 &163752008 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 5400000, guid: 4e5a0d387dc27394b81600988ad0216f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1641232233}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &177326011
 GameObject:
   m_ObjectHideFlags: 0
@@ -1877,7 +1883,7 @@ MonoBehaviour:
   itemAsset: {fileID: 2823567731083536338, guid: 7ea95847dc6132111b694cbc0523b8ea,
     type: 3}
   playerShooting: {fileID: 2072406361}
-  gunLineUber: {fileID: 2100000, guid: 753486700273ab1dc97c289d26fc23c7, type: 2}
+  playerHealth: {fileID: 2023876516}
 --- !u!1 &636207312
 GameObject:
   m_ObjectHideFlags: 0
@@ -3551,6 +3557,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 400004, guid: 4e5a0d387dc27394b81600988ad0216f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 4e5a0d387dc27394b81600988ad0216f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3586,6 +3596,31 @@ PrefabInstance:
     - target: {fileID: 10800002, guid: 4e5a0d387dc27394b81600988ad0216f, type: 3}
       propertyPath: m_BounceIntensity
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 4e5a0d387dc27394b81600988ad0216f, type: 3}
+      propertyPath: gunLineLevel5
+      value: 
+      objectReference: {fileID: 2100000, guid: 753486700273ab1dc97c289d26fc23c7, type: 2}
+    - target: {fileID: 11400000, guid: 4e5a0d387dc27394b81600988ad0216f, type: 3}
+      propertyPath: gunLineLevel10
+      value: 
+      objectReference: {fileID: 2100000, guid: df08b265d5fc9fdc3a1d6899452b6142, type: 2}
+    - target: {fileID: 11400000, guid: 4e5a0d387dc27394b81600988ad0216f, type: 3}
+      propertyPath: grenade
+      value: 
+      objectReference: {fileID: 977661202578629775, guid: ef7ad0d9cb91cff34808d8e529b73e58,
+        type: 3}
+    - target: {fileID: 11400000, guid: 4e5a0d387dc27394b81600988ad0216f, type: 3}
+      propertyPath: grenadeSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 4e5a0d387dc27394b81600988ad0216f, type: 3}
+      propertyPath: playerRigidbody
+      value: 
+      objectReference: {fileID: 163752008}
+    - target: {fileID: 11400000, guid: 4e5a0d387dc27394b81600988ad0216f, type: 3}
+      propertyPath: playerGrenadeSpeed
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 4e5a0d387dc27394b81600988ad0216f, type: 3}
       propertyPath: healthSlider

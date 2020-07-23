@@ -23,6 +23,19 @@ namespace CompleteProject
 
         [SerializeField] private Material gunLineLevel5;
         [SerializeField] private Material gunLineLevel10;
+
+        [SerializeField] private GameObject grenade;
+
+        [SerializeField] private float grenadeSpeed = 500.0f;
+        [SerializeField] private float playerGrenadeSpeed = 10.0f;
+
+        [SerializeField] private Rigidbody playerRigidbody;
+        
+        private Transform _transform;
+
+        private Vector3 _lastPos;
+
+        private float _grenadeTimer = 0.0f;
         
         public void UpgradeFirerate(int level)
         {
@@ -56,6 +69,10 @@ namespace CompleteProject
             gunAudio = GetComponent<AudioSource> ();
             gunLight = GetComponent<Light> ();
 			//faceLight = GetComponentInChildren<Light> ();
+
+            _transform = GetComponent<Transform>();
+
+            _lastPos = playerRigidbody.position;
         }
 
 
@@ -63,6 +80,7 @@ namespace CompleteProject
         {
             // Add the time since Update was last called to the timer.
             timer += Time.deltaTime;
+            _grenadeTimer += Time.deltaTime;
 
 #if !MOBILE_INPUT
             // If the Fire1 button is being press and it's time to fire...
@@ -70,6 +88,11 @@ namespace CompleteProject
             {
                 // ... shoot the gun.
                 Shoot ();
+            }
+
+            if (Input.GetButton("Fire2") && _grenadeTimer >= timeBetweenBullets) 
+            {
+                ThrowGrenade();
             }
 #else
             // If there is input on the shoot direction stick and it's time to fire...
@@ -85,6 +108,8 @@ namespace CompleteProject
                 // ... disable the effects.
                 DisableEffects ();
             }
+
+            _lastPos = playerRigidbody.position;
         }
 
 
@@ -97,6 +122,22 @@ namespace CompleteProject
         }
 
 
+        void ThrowGrenade()
+        {
+            _grenadeTimer = 0.0f;
+            
+            var g = Instantiate(grenade, _transform.position, _transform.rotation);
+            var rigid = g.GetComponent<Rigidbody>();
+
+
+            var playerVelocity = _lastPos - playerRigidbody.position;
+            
+            rigid.velocity = -(playerVelocity * playerGrenadeSpeed);
+            rigid.velocity += (g.transform.forward * grenadeSpeed);
+            
+            Debug.Log(rigid.velocity);
+        }
+        
         void Shoot ()
         {
             // Reset the timer.
@@ -118,8 +159,8 @@ namespace CompleteProject
             gunLine.SetPosition (0, transform.position);
 
             // Set the shootRay so that it starts at the end of the gun and points forward from the barrel.
-            shootRay.origin = transform.position;
-            shootRay.direction = transform.forward;
+            shootRay.origin = _transform.position;
+            shootRay.direction = _transform.forward;
 
             // Perform the raycast against gameobjects on the shootable layer and if it hits something...
             if(Physics.Raycast (shootRay, out shootHit, range, shootableMask))
