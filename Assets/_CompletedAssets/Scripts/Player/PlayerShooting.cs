@@ -15,12 +15,35 @@ namespace CompleteProject
         RaycastHit shootHit;                            // A raycast hit to get information about what was hit.
         int shootableMask;                              // A layer mask so the raycast only hits things on the shootable layer.
         ParticleSystem gunParticles;                    // Reference to the particle system.
-        public LineRenderer gunLine;                           // Reference to the line renderer.
+        LineRenderer gunLine;                           // Reference to the line renderer.
         AudioSource gunAudio;                           // Reference to the audio source.
         Light gunLight;                                 // Reference to the light component.
 		public Light faceLight;								// Duh
         float effectsDisplayTime = 0.2f;                // The proportion of the timeBetweenBullets that the effects will display for.
 
+        [SerializeField] private Material gunLineLevel5;
+        [SerializeField] private Material gunLineLevel10;
+        
+        public void UpgradeFirerate(int level)
+        {
+            timeBetweenBullets /= 2.0f;
+        }
+
+        public void UpgradeDamage(int level)
+        {
+            damagePerShot *= 2;
+            switch (level)
+            {
+                case 5:
+                    gunLine.material = gunLineLevel5;
+                    gunLight.color = faceLight.color = Color.red;
+                    break;
+                case 10:
+                    gunLine.material = gunLineLevel10;
+                    gunLight.color = faceLight.color = Color.blue;
+                    break;
+            }
+        }
 
         void Awake ()
         {

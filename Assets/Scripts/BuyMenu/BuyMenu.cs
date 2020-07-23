@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CompleteProject;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace BuyMenu
 {
@@ -13,27 +14,13 @@ namespace BuyMenu
 
         [SerializeField] private PlayerShooting playerShooting;
 
-        [SerializeField] private Material gunLineUber;
-
         private int _currentY = -10;
         
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
-            AddPanel(new BuyMenuItemProperties("Gun firerate",100, 2.0, (level) =>
-            {
-                playerShooting.timeBetweenBullets /= 2.0f;
-                Debug.Log("1: " + level);
-            }));
-            AddPanel(new BuyMenuItemProperties("Gun damage",200, 3.0, (level) =>
-            {
-                playerShooting.damagePerShot *= 2;
-                if (level == 1)
-                {
-                    playerShooting.gunLine.material = gunLineUber;
-                }
-                Debug.Log("2: " + level);
-            }));
+            AddPanel(new BuyMenuItemProperties("Gun firerate",1, 2.0, playerShooting.UpgradeFirerate));
+            AddPanel(new BuyMenuItemProperties("Gun damage",1, 1.0, playerShooting.UpgradeDamage));
         }
 
         private void AddPanel(BuyMenuItemProperties properties)
@@ -47,12 +34,6 @@ namespace BuyMenu
             rectTransform.anchoredPosition = new Vector2(rectTransform.anchoredPosition.x, _currentY);
 
             _currentY = -((int)rectTransform.rect.height) + -10;
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
         }
     }   
 }
