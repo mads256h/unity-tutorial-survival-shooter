@@ -9,12 +9,24 @@ public class Grenade : MonoBehaviour
     [SerializeField] private int damage = 20;
 
     [SerializeField] private int shootableLayer;
+
+    [SerializeField] private Material level0Material;
+    [SerializeField] private Material level5Material;
+    [SerializeField] private Material level10Material;
     
     private SphereCollider _sphereCollider;
 
+    private int _level = 0;
+    
     private float _timer = 0.0f;
 
-    private bool destroyNextFrame = false;
+    private bool _destroyNextFrame = false;
+
+    public void Initialize(int dmg, int level)
+    {
+        damage = dmg;
+        _level = level;
+    }
     
     private void Start()
     {
@@ -26,18 +38,34 @@ public class Grenade : MonoBehaviour
         }
 
         _sphereCollider.enabled = false;
+
+        foreach (var meshRenderer in GetComponentsInChildren<MeshRenderer>())
+        {
+            if (_level == 10)
+            {
+                meshRenderer.material = level10Material;
+            }
+            else if (_level < 5)
+            {
+                meshRenderer.material = level0Material;
+            }
+            else
+            {
+                meshRenderer.material = level5Material;
+            }
+        }
     }
 
     private void Update()
     {
-        if (destroyNextFrame) Destroy(gameObject);
+        if (_destroyNextFrame) Destroy(gameObject);
         
         _timer += Time.deltaTime;
 
         if (_timer < timeToExplode) return;
         
         _sphereCollider.enabled = true;
-        destroyNextFrame = true;
+        _destroyNextFrame = true;
     }
 
     private void OnTriggerEnter(Collider other)
