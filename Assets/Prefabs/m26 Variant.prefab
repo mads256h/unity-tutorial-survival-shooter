@@ -57,9 +57,6 @@ MonoBehaviour:
   timeToExplode: 1
   damage: 20
   shootableLayer: 9
-  level0Material: {fileID: 2100000, guid: 6651d887dbd898ce69ce8431c13b414d, type: 2}
-  level5Material: {fileID: 2100000, guid: d7e891b0335a06398a9b36e9f21ac64f, type: 2}
-  level10Material: {fileID: 2100000, guid: 735b9be2ee1b3f53caa0d09ca705cebd, type: 2}
 --- !u!1001 &977661202578572939
 PrefabInstance:
   m_ObjectHideFlags: 0
